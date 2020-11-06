@@ -1,19 +1,36 @@
-import {BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend} from 'recharts'
-
+import {BarChart, Bar} from 'recharts'
+import {useState} from 'react'
 function SingleChart() {
-    const data = [
-        {name: 'Page A', uv: 4000, pv: 2400, amt: 2400},
-        {name: 'Page B', uv: 3000, pv: 1398, amt: 2210},
-        {name: 'Page C', uv: 2000, pv: 9800, amt: 2290},
-        {name: 'Page D', uv: 2780, pv: 3908, amt: 2000},
-        {name: 'Page E', uv: 1890, pv: 4800, amt: 2181},
-        {name: 'Page F', uv: 2390, pv: 3800, amt: 2500},
-        {name: 'Page G', uv: 3490, pv: 4300, amt: 2100},
-    ];
-    return (
+    const [data,setData]=useState([
+        { value: 4000},
+        { value: 3000},
+        { value: 2000},
+        { value: 2780},
+        { value: 1890},
+        { value: 1000},
+        { value: 3490},
+    ])
+
+    const bubbleSort =async (e)=>{
+        // e.preventDefault()
+        for(let i = 0;i<data.length;++i){
+            for(let j=i;j<data.length-1;++j){
+                if(data[j+1].value<data[i].value){
+                    let temp  = data[j+1]
+                    data[j+1]=data[i]
+                    data[i]=temp
+
+                }
+            }
+        }
+        setData([...data])
+    }
+    return (<>
         <BarChart width={250} height={200} data={data}>
-        <Bar dataKey='uv' fill='#8884d8'/>
-    </BarChart>
+            <Bar dataKey='value' fill='#8884d8'/>
+        </BarChart>
+            <button onClick={bubbleSort}>Click</button>
+        </>
     )
 }
 
