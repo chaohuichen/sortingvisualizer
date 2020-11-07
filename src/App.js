@@ -1,11 +1,10 @@
-
 import './App.css';
-import SingleChart from './SingleChart'
-function App() {
+import Charts from './Charts';
 
+function App() {
   return (
-    <div className="App">
-      <SingleChart/>
+    <div className='App'>
+      <Charts />
     </div>
   );
 }
