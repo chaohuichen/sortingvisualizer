@@ -1,3 +1,4 @@
 import BubbleSort from './BubbleSort';
 import InsertionSort from './InsertionSort';
-export { BubbleSort, InsertionSort }
+import MergeSort from './MergeSort';
+export { BubbleSort, InsertionSort, MergeSort }

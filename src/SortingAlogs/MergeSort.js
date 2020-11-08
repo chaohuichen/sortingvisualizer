@@ -1,26 +1,99 @@
-const MergeSort = (data) => {
-  const mid = Math.floor((0 + data.length) / 2)
-  const left = data.slice(0, mid)
-  const right = data.slice(mid + 1)
-  return sort(left, right)
-}
-function sort (left, right) {
-  let i = 0
-  let j = 0
-  const leftSize = left.length
-  const rightSize = right.length
-  const tempArr = new Array(leftSize + rightSize)
-  while (i < leftSize && j < leftSize) {
-    if (left[i] < right[j]) {
-      tempArr[i + j] = left[i]
-      i++
-    } else {
-      tempArr[j + i] = right[j]
-      j++
+import { comparing, point } from './ConstantsColor';
+
+const MergeSort = async (array, animationChange, swapStateValue, finalFinishAnimation, finalSetData, setData) => {
+  const n = array.length
+  let currSize
+  let leftStart
+
+  for (currSize = 1; currSize <= n - 1; currSize = 2 * currSize) {
+    for (leftStart = 0; leftStart < n - 1; leftStart += 2 * currSize) {
+      const mid = Math.min(leftStart + currSize - 1, n - 1)
+      const rightEnd = Math.min(leftStart + 2 * currSize - 1, n - 1)
+
+      await Merge(array, leftStart, mid, rightEnd, animationChange, swapStateValue, finalFinishAnimation, finalSetData, setData)
     }
   }
-  while (i < leftSize)tempArr[i + j] = left[i]
-  while (j < rightSize)tempArr[i + j] = right[j]
-  return tempArr
+  finalFinishAnimation()
+  finalSetData(array)
 }
+
+const Merge = async (arr, left, mid, right, animationChange, swapStateValue, finalFinishAnimation, finalSetData, setData) => {
+  let i, j, k
+  const leftArrSize = mid - left + 1
+  const rightArrSize = right - mid
+
+  const leftArr = new Array(leftArrSize)
+  const rightArr = new Array(rightArrSize)
+  // copy the array into the left and right
+  for (i = 0; i < leftArrSize; ++i) {
+    leftArr[i] = arr[left + i]
+  }
+  for (j = 0; j < rightArrSize; ++j) {
+    rightArr[j] = arr[mid + 1 + j]
+  }
+
+  i = 0
+  j = 0
+  k = left
+
+  while (i < leftArrSize && j < rightArrSize) {
+    // comparing left and right
+    console.log('k', k)
+    console.log('i & j', i, j)
+    await animationChange(arr, comparing, left + i, mid + 1 + j)
+    if (leftArr[i].value <= rightArr[j].value) {
+      setData((prevState) => {
+        return prevState.map((element, index) => {
+          if (index === k) {
+            return { value: leftArr[i].value, color: point }
+          } else {
+            return element
+          }
+        })
+      })
+      await animationChange(arr, point, i)
+      arr[k++] = { value: leftArr[i++].value, color: point }
+    } else {
+      setData((prevState) => {
+        return prevState.map((element, index) => {
+          if (index === k) {
+            return { value: rightArr[j].value, color: point }
+          } else {
+            return element
+          }
+        })
+      })
+      await animationChange(arr, point, j)
+      arr[k++] = { value: rightArr[j++].value, color: point }
+    }
+  }
+  // copy left over
+  while (i < leftArrSize) {
+    setData((prevState) => {
+      return prevState.map((element, index) => {
+        if (index === k) {
+          return { value: leftArr[i].value, color: point }
+        } else {
+          return element
+        }
+      })
+    })
+    await animationChange(arr, point, i)
+    arr[k++] = { value: leftArr[i++].value, color: point }
+  }
+  while (j < rightArrSize) {
+    setData((prevState) => {
+      return prevState.map((element, index) => {
+        if (index === k) {
+          return { value: rightArr[j].value, color: point }
+        } else {
+          return element
+        }
+      })
+    })
+    await animationChange(arr, point, j)
+    arr[k++] = { value: rightArr[j++].value, color: point }
+  }
+}
+
 export default MergeSort

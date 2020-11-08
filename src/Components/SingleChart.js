@@ -7,7 +7,7 @@ import {
   MenuItem,
   InputLabel
 } from '@material-ui/core';
-import { BubbleSort, InsertionSort } from '../SortingAlogs';
+import { InsertionSort, MergeSort } from '../SortingAlogs';
 import Timer from './Timer';
 const finish = 'green'
 
@@ -32,7 +32,9 @@ function SingleChart ({ incomingData, startAnimation }) {
 
   const startSorting = () => {
     if (sortingAlgo === 'bubbleSort') {
-      BubbleSort(data, animationChange, swapStateValue, finalFinishAnimation, finalSetData)
+      console.log('starttttttttttt')
+      MergeSort(data, animationChange, swapStateValue, finalFinishAnimation, finalSetData, setData)
+      // BubbleSort(data, animationChange, swapStateValue, finalFinishAnimation, finalSetData)
     } else {
       InsertionSort(data, animationChange, swapStateValue, finalFinishAnimation, finalSetData, setData)
     }
@@ -55,7 +57,7 @@ function SingleChart ({ incomingData, startAnimation }) {
         }
       })
     })
-    await sleep(10)
+    await sleep(5000)
   };
   const swapStateValue = (x, y) => {
     setData((prevState) => {
