@@ -7,11 +7,10 @@ import {
   MenuItem,
   InputLabel
 } from '@material-ui/core';
-const comparing = 'red'
-const original = '#8884d8'
+import { BubbleSort, InsertionSort } from '../SortingAlogs';
+import Timer from './Timer';
 const finish = 'green'
-const swap = 'yellow'
-const point = 'orange'
+
 function SingleChart ({ incomingData, startAnimation }) {
   const [data, setData] = useState([])
   const [sortingAlgo, setSortingAlgo] = useState('bubbleSort')
@@ -22,28 +21,26 @@ function SingleChart ({ incomingData, startAnimation }) {
       setIsActive(true)
       startSorting()
     }
+    return () => {
+      setSeconds(0)
+      setIsActive(false)
+    }
   }, [incomingData, startAnimation])
 
   const [seconds, setSeconds] = useState(0);
   const [isActive, setIsActive] = useState(false);
-  useEffect(() => {
-    let interval = null;
-    if (isActive) {
-      interval = setInterval(() => {
-        setSeconds(seconds => seconds + 1);
-      }, 1000);
-    } else if (!isActive && seconds !== 0) {
-      clearInterval(interval);
-    }
-    return () => clearInterval(interval);
-  }, [isActive, seconds]);
 
   const startSorting = () => {
     if (sortingAlgo === 'bubbleSort') {
-      bubbleSort()
+      BubbleSort(data, animationChange, swapStateValue, finalFinishAnimation, finalSetData)
     } else {
-      insertionSort()
+      InsertionSort(data, animationChange, swapStateValue, finalFinishAnimation, finalSetData, setData)
     }
+  }
+
+  const finalSetData = (data) => {
+    setData([...data])
+    setIsActive(false)
   }
   const animationChange = async (data, color, x, y) => {
     setData(() => {
@@ -58,7 +55,6 @@ function SingleChart ({ incomingData, startAnimation }) {
         }
       })
     })
-
     await sleep(10)
   };
   const swapStateValue = (x, y) => {
@@ -74,65 +70,6 @@ function SingleChart ({ incomingData, startAnimation }) {
       })
     })
   }
-  const bubbleSort = async () => {
-    for (let i = 0; i < data.length; ++i) {
-      for (let j = i; j < data.length - 1; ++j) {
-        // comparing the change in state
-        await animationChange(data, comparing, j + 1, i)
-        if (data[j + 1].value < data[i].value) {
-          // swap in local
-          const temp = data[j + 1]
-          data[j + 1] = data[i]
-          data[i] = temp
-          // swap in state
-          swapStateValue(i, j + 1)
-          await animationChange(data, swap, j + 1, i)
-        }
-        // change back the original color
-        await animationChange(data, original, j + 1, i)
-      }
-      // await animationChange(data, finish, i)
-      // // comparing the change in local
-      // data[i] = {
-      //   value: data[i].value,
-      //   color: finish
-      // }
-    }
-    finalFinishAnimation()
-    setData([...data])
-    setIsActive(false)
-  };
-
-  const insertionSort = async () => {
-    for (let i = 1; i < data.length; i++) {
-      const temp = data[i]
-      await animationChange(data, point, i)
-      for (let j = i; j >= 0; j--) {
-        await animationChange(data, comparing, j - 1, i)
-        if (j > 0 && data[j - 1].value > temp.value) {
-          data[j] = data[j - 1];
-          // change in state
-          setData((prevState) => {
-            return prevState.map((element, index) => {
-              if (index === j) {
-                return { ...data[j - 1] }
-              } else {
-                return element
-              }
-            })
-          })
-          await animationChange(data, swap, j, j - 1)
-        } else {
-          data[j] = temp;
-          await animationChange(data, swap, j, i)
-          break;
-        }
-      }
-    }
-    finalFinishAnimation()
-    setData([...data])
-    setIsActive(false)
-  }
 
   const finalFinishAnimation = async () => {
     for (let i = 0; i < data.length; ++i) {
@@ -144,6 +81,7 @@ function SingleChart ({ incomingData, startAnimation }) {
       await sleep(0)
     }
   }
+
   return (
       <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
       <BarChart width={250} height={200} data={data} style={{ }}>
@@ -164,7 +102,7 @@ function SingleChart ({ incomingData, startAnimation }) {
             <MenuItem value={'insertionSort'}>Insertion Sort</MenuItem>
           </Select>
         </FormControl>
-          <div>{seconds}s</div>
+          <Timer isActive={isActive} setIsActive={setIsActive} seconds={seconds} setSeconds={setSeconds}/>
         </div>
         </div>
   )
