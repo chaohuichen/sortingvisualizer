@@ -18,9 +18,25 @@ function SingleChart ({ incomingData, startAnimation }) {
   useEffect(() => {
     setData([...incomingData])
     if (startAnimation) {
+      setSeconds(0)
+      setIsActive(true)
       startSorting()
     }
   }, [incomingData, startAnimation])
+
+  const [seconds, setSeconds] = useState(0);
+  const [isActive, setIsActive] = useState(false);
+  useEffect(() => {
+    let interval = null;
+    if (isActive) {
+      interval = setInterval(() => {
+        setSeconds(seconds => seconds + 1);
+      }, 1000);
+    } else if (!isActive && seconds !== 0) {
+      clearInterval(interval);
+    }
+    return () => clearInterval(interval);
+  }, [isActive, seconds]);
 
   const startSorting = () => {
     if (sortingAlgo === 'bubbleSort') {
@@ -84,6 +100,7 @@ function SingleChart ({ incomingData, startAnimation }) {
     }
     finalFinishAnimation()
     setData([...data])
+    setIsActive(false)
   };
 
   const insertionSort = async () => {
@@ -114,6 +131,7 @@ function SingleChart ({ incomingData, startAnimation }) {
     }
     finalFinishAnimation()
     setData([...data])
+    setIsActive(false)
   }
 
   const finalFinishAnimation = async () => {
@@ -135,6 +153,7 @@ function SingleChart ({ incomingData, startAnimation }) {
           })}
         </Bar>
       </BarChart>
+        <div>
         <FormControl style={{ }}>
           <InputLabel >Sorting Algo</InputLabel>
           <Select className='menuitem'
@@ -145,6 +164,8 @@ function SingleChart ({ incomingData, startAnimation }) {
             <MenuItem value={'insertionSort'}>Insertion Sort</MenuItem>
           </Select>
         </FormControl>
+          <div>{seconds}s</div>
+        </div>
         </div>
   )
 }
