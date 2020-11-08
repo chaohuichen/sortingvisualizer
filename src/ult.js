@@ -3,12 +3,12 @@ const sleep = (milliseconds) => {
     setTimeout(resolve, milliseconds)
   })
 };
-const  generateRandomArray=()=>{
-  let randomLen = Math.ceil(Math.random()*100)+10
-  let randomArray = new Array(randomLen)
-  for(let  i = 0;i<randomLen;i++){
-    randomArray[i] ={value:Math.ceil(Math.random()*100),color:'#8884d8'}
+const generateRandomArray = () => {
+  const randomLen = Math.ceil(Math.random() * 100) + 10
+  const randomArray = new Array(randomLen)
+  for (let i = 0; i < randomLen; i++) {
+    randomArray[i] = { value: Math.ceil(Math.random() * 100), color: '#8884d8' }
   }
-  return  randomArray
+  return randomArray
 }
-export { sleep,generateRandomArray }
+export { sleep, generateRandomArray }

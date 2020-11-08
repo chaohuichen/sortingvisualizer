@@ -1,7 +1,7 @@
 import './App.css';
 import Charts from './Charts';
 
-function App() {
+function App () {
   return (
     <div className='App'>
       <Charts />
