@@ -13,6 +13,10 @@ const Timer = ({ isActive, seconds, setSeconds }) => {
     return () => clearInterval(interval);
   }, [isActive, seconds]);
 
-  return <div>{moment.utc(seconds * 1000).format('mm:ss')}</div>
+  return (
+  <div>
+    <h3>finish time: </h3>
+    <div style={{ border: '2px solid black' }}>{moment.utc(seconds * 1000).format('mm:ss')}</div>
+  </div>)
 }
 export default Timer

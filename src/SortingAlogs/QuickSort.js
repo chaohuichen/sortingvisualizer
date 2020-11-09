@@ -1,7 +1,8 @@
-import { comparing, swap } from './ConstantsColor';
-const partition = async (arr, low, high, animationChange, swapStateValue, finalFinishAnimation, finalSetData, setData) => {
+import { comparing, swap, point } from './ConstantsColor';
+const partition = async (arr, low, high, animationChange, swapStateValue) => {
   const pivot = arr[high]
   let i = low - 1
+  await animationChange(arr, point, high)
   for (let j = low; j < high; j++) {
     await animationChange(arr, comparing, j, high)
     if (arr[j].value < pivot.value) {
@@ -21,19 +22,16 @@ const partition = async (arr, low, high, animationChange, swapStateValue, finalF
   return i + 1
 }
 
-const Sort = async (arr, low, high, animationChange, swapStateValue, finalFinishAnimation, finalSetData, setData) => {
+const Sort = async (arr, low, high, animationChange, swapStateValue) => {
   if (low < high) {
-    const pi = await partition(arr, low, high, animationChange, swapStateValue, finalFinishAnimation, finalSetData, setData)
-    await Sort(arr, low, pi - 1, animationChange, swapStateValue, finalFinishAnimation, finalSetData, setData)
-    await Sort(arr, pi + 1, high, animationChange, swapStateValue, finalFinishAnimation, finalSetData, setData)
+    const pi = await partition(arr, low, high, animationChange, swapStateValue)
+    await Sort(arr, low, pi - 1, animationChange, swapStateValue)
+    await Sort(arr, pi + 1, high, animationChange, swapStateValue)
   }
-  // finalSetData(arr)
-  // finalFinishAnimation()
 }
-const QuickSort = (arr, low, high, animationChange, swapStateValue, finalFinishAnimation, finalSetData, setData) => {
-  Sort(arr, 0, arr.length - 1)
+const QuickSort = async (arr, low, high, animationChange, swapStateValue, finalFinishAnimation, finalSetData) => {
+  await Sort(arr, 0, arr.length - 1, animationChange, swapStateValue)
   finalSetData(arr)
   finalFinishAnimation()
-  console.log(arr)
 }
 export default QuickSort

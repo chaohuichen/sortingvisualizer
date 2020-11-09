@@ -49,11 +49,13 @@ const Charts = () => {
       <Button onClick={handleAddArray}>Add more array</Button>
       <Button onClick={handleReset}>Reset</Button>
     </ButtonGroup>
+    <div className='products-center'>
     {
       state.data.map((dataValues, index) => {
         return <SingleChart startAnimation={state.startAnimation} key={index} incomingData={dataValues} />
       })
     }
+    </div>
   </div>
 };
 

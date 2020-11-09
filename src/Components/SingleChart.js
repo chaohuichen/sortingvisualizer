@@ -1,4 +1,4 @@
-import { Bar, BarChart, Cell, XAxis } from 'recharts'
+import { Bar, BarChart, Cell } from 'recharts'
 import { useEffect, useState } from 'react'
 import { sleep } from './ult'
 import {
@@ -8,8 +8,8 @@ import {
   InputLabel
 } from '@material-ui/core';
 import { InsertionSort, MergeSort, BubbleSort, QuickSort } from '../SortingAlogs';
+import { finish } from '../SortingAlogs/ConstantsColor';
 import Timer from './Timer';
-const finish = 'green'
 
 function SingleChart ({ incomingData, startAnimation }) {
   const [data, setData] = useState([])
@@ -31,15 +31,33 @@ function SingleChart ({ incomingData, startAnimation }) {
   const [isActive, setIsActive] = useState(false);
 
   const startSorting = () => {
-    if (sortingAlgo === 'bubbleSort') {
-      QuickSort(data, 0, data.length - 1, animationChange, swapStateValue, finalFinishAnimation, finalSetData, setData)
-    } else if (sortingAlgo === 'quickSort') {
-      BubbleSort(data, animationChange, swapStateValue, finalFinishAnimation, finalSetData)
-    } else if (sortingAlgo === 'insertionSort') {
-      InsertionSort(data, animationChange, swapStateValue, finalFinishAnimation, finalSetData, setData)
-    } else if (sortingAlgo === 'mergeSort') {
-      MergeSort(data, animationChange, swapStateValue, finalFinishAnimation, finalSetData, setData)
+    switch (sortingAlgo) {
+      case 'quickSort':
+        QuickSort(data, 0, data.length - 1, animationChange, swapStateValue, finalFinishAnimation, finalSetData)
+        break;
+      case 'bubbleSort':
+        BubbleSort(data, animationChange, swapStateValue, finalFinishAnimation, finalSetData)
+        break;
+      case 'insertionSort':
+        InsertionSort(data, animationChange, swapStateValue, finalFinishAnimation, finalSetData, setData)
+        break;
+      case 'mergeSort':
+        MergeSort(data, animationChange, finalFinishAnimation, finalSetData, changeSingleValue)
+        break;
+      default:
     }
+  }
+
+  const changeSingleValue = (k, value) => {
+    setData((prevState) => {
+      return prevState.map((element, index) => {
+        if (index === k) {
+          return { value: value }
+        } else {
+          return element
+        }
+      })
+    })
   }
 
   const finalSetData = (data) => {
@@ -87,16 +105,15 @@ function SingleChart ({ incomingData, startAnimation }) {
   }
 
   return (
-      <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
-      <BarChart width={250} height={200} data={data} style={{ }}>
+      <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', marginTop: '10px' }}>
+      <BarChart width={350} height={250} data={data}>
         <Bar dataKey='value'>
           {data.map((d, index) => {
             return <Cell key={index} fill={d.color} />
           })}
         </Bar>
-        <XAxis dataKey='value' />
       </BarChart>
-        <div>
+        <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', marginLeft: '5px' }}>
         <FormControl style={{ }}>
           <InputLabel >Sorting Algo</InputLabel>
           <Select className='menuitem'
@@ -106,6 +123,7 @@ function SingleChart ({ incomingData, startAnimation }) {
             <MenuItem value={'bubbleSort'}>Bubble Sort</MenuItem>
             <MenuItem value={'insertionSort'}>Insertion Sort</MenuItem>
             <MenuItem value={'mergeSort'}>Merge Sort</MenuItem>
+            <MenuItem value={'quickSort'}>Quick Sort</MenuItem>
           </Select>
         </FormControl>
           <Timer isActive={isActive} seconds={seconds} setSeconds={setSeconds}/>
