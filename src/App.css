@@ -31,12 +31,30 @@
 .products-center {
   width: 110vw;
   margin: 0 auto;
-  max-width: 1350px;
+  max-width: 1450px;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
   grid-column-gap: 1.5rem;
   grid-row-gap: 2rem;
 }
+
+/*for time complexity color */
+.red{
+  color:red;
+}
+.orange{
+  color:orange;
+}
+.green{
+  color:green;
+}
+.greenyellow{
+  color:lawngreen;
+}
+.yellow{
+  color:yellow;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

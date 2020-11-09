@@ -10,7 +10,7 @@ import {
 import { InsertionSort, MergeSort, BubbleSort, QuickSort, SelectionSort } from '../SortingAlogs';
 import { finish } from '../SortingAlogs/ConstantsColor';
 import Timer from './Timer';
-
+import AlgoComplexityInfo from './AlgoComplexityInfo'
 function SingleChart ({ incomingData, startAnimation }) {
   const [data, setData] = useState([])
   const [sortingAlgo, setSortingAlgo] = useState('bubbleSort')
@@ -80,7 +80,7 @@ function SingleChart ({ incomingData, startAnimation }) {
         }
       })
     })
-    await sleep(1000)
+    await sleep(10)
   };
   const swapStateValue = (x, y) => {
     setData((prevState) => {
@@ -109,13 +109,16 @@ function SingleChart ({ incomingData, startAnimation }) {
 
   return (
       <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', marginTop: '10px' }}>
-      <BarChart width={350} height={250} data={data}>
-        <Bar dataKey='value'>
-          {data.map((d, index) => {
-            return <Cell key={index} fill={d.color} />
-          })}
-        </Bar>
-      </BarChart>
+        <div>
+          <BarChart width={350} height={250} data={data}>
+            <Bar dataKey='value'>
+             {data.map((d, index) => {
+               return <Cell key={index} fill={d.color} />
+             })}
+            </Bar>
+            </BarChart>
+          <AlgoComplexityInfo sortingAlgo={sortingAlgo}/>
+        </div>
         <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', marginLeft: '5px' }}>
         <FormControl style={{ }}>
           <InputLabel >Sorting Algo</InputLabel>

@@ -1,0 +1,52 @@
+{
+  "selectionSort": {
+    "TimeComplexity": {
+      "Best": "O(n^2)",
+      "Average": "O(n^2)",
+      "Worst": "O(n^2)"
+    },
+    "SpaceComplexity": {
+      "Worst":"O(1)"
+    }
+  },
+  "quickSort": {
+    "TimeComplexity": {
+      "Best": "O(n log(n))",
+      "Average": "O(n log(n))",
+      "Worst": "O(n^2)"
+    },
+    "SpaceComplexity": {
+      "Worst": "O(log(n))"
+    }
+  },
+  "bubbleSort": {
+    "TimeComplexity": {
+      "Best": "O(n)",
+      "Average": "O(n^2)",
+      "Worst": "O(n^2)"
+    },
+    "SpaceComplexity": {
+      "Worst": "O(1)"
+    }
+  },
+  "insertionSort": {
+    "TimeComplexity": {
+      "Best": "O(n)",
+      "Average": "O(n^2)",
+      "Worst": "O(n^2)"
+    },
+    "SpaceComplexity": {
+      "Worst": "O(1)"
+    }
+  },
+  "mergeSort": {
+    "TimeComplexity": {
+      "Best": "O(n log(n))",
+      "Average": "O(n log(n))",
+      "Worst": "O(n log(n))"
+    },
+    "SpaceComplexity": {
+      "Worst": "O(n)"
+    }
+  }
+}

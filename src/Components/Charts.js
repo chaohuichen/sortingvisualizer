@@ -44,9 +44,9 @@ const Charts = () => {
   }
   return <div >
     <ButtonGroup size="large" color="primary" aria-label="outlined primary button group">
-      <Button onClick={handleStartAnimation} >Start</Button>
-      <Button onClick={handleRandomArray} >Random Array</Button>
-      <Button onClick={handleAddArray}>Add more array</Button>
+      <Button disabled={state.startAnimation} onClick={handleStartAnimation} >Start</Button>
+      <Button disabled={state.startAnimation} onClick={handleRandomArray} >Random Array</Button>
+      <Button disabled={state.startAnimation} onClick={handleAddArray}>Add more array</Button>
       <Button onClick={handleReset}>Reset</Button>
     </ButtonGroup>
     <div className='products-center'>
