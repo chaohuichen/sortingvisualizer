@@ -7,7 +7,7 @@ import {
   MenuItem,
   InputLabel
 } from '@material-ui/core';
-import { InsertionSort, MergeSort, BubbleSort, QuickSort } from '../SortingAlogs';
+import { InsertionSort, MergeSort, BubbleSort, QuickSort, SelectionSort } from '../SortingAlogs';
 import { finish } from '../SortingAlogs/ConstantsColor';
 import Timer from './Timer';
 
@@ -32,6 +32,9 @@ function SingleChart ({ incomingData, startAnimation }) {
 
   const startSorting = () => {
     switch (sortingAlgo) {
+      case 'selectionSort':
+        SelectionSort(data, animationChange, swapStateValue, finalFinishAnimation, finalSetData)
+        break;
       case 'quickSort':
         QuickSort(data, 0, data.length - 1, animationChange, swapStateValue, finalFinishAnimation, finalSetData)
         break;
@@ -77,7 +80,7 @@ function SingleChart ({ incomingData, startAnimation }) {
         }
       })
     })
-    await sleep(10)
+    await sleep(1000)
   };
   const swapStateValue = (x, y) => {
     setData((prevState) => {
@@ -122,6 +125,7 @@ function SingleChart ({ incomingData, startAnimation }) {
           >
             <MenuItem value={'bubbleSort'}>Bubble Sort</MenuItem>
             <MenuItem value={'insertionSort'}>Insertion Sort</MenuItem>
+            <MenuItem value={'selectionSort'}>Selection Sort</MenuItem>
             <MenuItem value={'mergeSort'}>Merge Sort</MenuItem>
             <MenuItem value={'quickSort'}>Quick Sort</MenuItem>
           </Select>
