@@ -108,7 +108,7 @@ function SingleChart ({ incomingData, startAnimation }) {
             <MenuItem value={'mergeSort'}>Merge Sort</MenuItem>
           </Select>
         </FormControl>
-          <Timer isActive={isActive} setIsActive={setIsActive} seconds={seconds} setSeconds={setSeconds}/>
+          <Timer isActive={isActive} seconds={seconds} setSeconds={setSeconds}/>
         </div>
         </div>
   )

@@ -1,7 +1,6 @@
 import { useEffect } from 'react'
-
-const Timer = ({ isActive, setIsActive, seconds, setSeconds }) => {
-  // const [isActive, setIsActive] = useState(false);
+import moment from 'moment'
+const Timer = ({ isActive, seconds, setSeconds }) => {
   useEffect(() => {
     let interval = null;
     if (isActive) {
@@ -14,6 +13,6 @@ const Timer = ({ isActive, setIsActive, seconds, setSeconds }) => {
     return () => clearInterval(interval);
   }, [isActive, seconds]);
 
-  return <div>{seconds}s</div>
+  return <div>{moment.utc(seconds * 1000).format('mm:ss')}</div>
 }
 export default Timer
