@@ -1,4 +1,4 @@
-import { Bar, BarChart, Cell } from 'recharts'
+import { Bar, BarChart, Cell, XAxis } from 'recharts'
 import { useEffect, useState } from 'react'
 import { sleep } from './ult'
 import {
@@ -7,7 +7,7 @@ import {
   MenuItem,
   InputLabel
 } from '@material-ui/core';
-import { InsertionSort, MergeSort } from '../SortingAlogs';
+import { InsertionSort, MergeSort, BubbleSort, QuickSort } from '../SortingAlogs';
 import Timer from './Timer';
 const finish = 'green'
 
@@ -32,11 +32,13 @@ function SingleChart ({ incomingData, startAnimation }) {
 
   const startSorting = () => {
     if (sortingAlgo === 'bubbleSort') {
-      console.log('starttttttttttt')
-      MergeSort(data, animationChange, swapStateValue, finalFinishAnimation, finalSetData, setData)
-      // BubbleSort(data, animationChange, swapStateValue, finalFinishAnimation, finalSetData)
-    } else {
+      QuickSort(data, 0, data.length - 1, animationChange, swapStateValue, finalFinishAnimation, finalSetData, setData)
+    } else if (sortingAlgo === 'quickSort') {
+      BubbleSort(data, animationChange, swapStateValue, finalFinishAnimation, finalSetData)
+    } else if (sortingAlgo === 'insertionSort') {
       InsertionSort(data, animationChange, swapStateValue, finalFinishAnimation, finalSetData, setData)
+    } else if (sortingAlgo === 'mergeSort') {
+      MergeSort(data, animationChange, swapStateValue, finalFinishAnimation, finalSetData, setData)
     }
   }
 
@@ -57,7 +59,7 @@ function SingleChart ({ incomingData, startAnimation }) {
         }
       })
     })
-    await sleep(5000)
+    await sleep(10)
   };
   const swapStateValue = (x, y) => {
     setData((prevState) => {
@@ -92,6 +94,7 @@ function SingleChart ({ incomingData, startAnimation }) {
             return <Cell key={index} fill={d.color} />
           })}
         </Bar>
+        <XAxis dataKey='value' />
       </BarChart>
         <div>
         <FormControl style={{ }}>
@@ -102,6 +105,7 @@ function SingleChart ({ incomingData, startAnimation }) {
           >
             <MenuItem value={'bubbleSort'}>Bubble Sort</MenuItem>
             <MenuItem value={'insertionSort'}>Insertion Sort</MenuItem>
+            <MenuItem value={'mergeSort'}>Merge Sort</MenuItem>
           </Select>
         </FormControl>
           <Timer isActive={isActive} setIsActive={setIsActive} seconds={seconds} setSeconds={setSeconds}/>

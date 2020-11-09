@@ -1,5 +1,5 @@
 import { comparing, point } from './ConstantsColor';
-
+// https://www.geeksforgeeks.org/iterative-merge-sort/
 const MergeSort = async (array, animationChange, swapStateValue, finalFinishAnimation, finalSetData, setData) => {
   const n = array.length
   let currSize
@@ -38,33 +38,31 @@ const Merge = async (arr, left, mid, right, animationChange, swapStateValue, fin
 
   while (i < leftArrSize && j < rightArrSize) {
     // comparing left and right
-    console.log('k', k)
-    console.log('i & j', i, j)
     await animationChange(arr, comparing, left + i, mid + 1 + j)
     if (leftArr[i].value <= rightArr[j].value) {
       setData((prevState) => {
         return prevState.map((element, index) => {
           if (index === k) {
-            return { value: leftArr[i].value, color: point }
+            return { value: leftArr[i].value }
           } else {
             return element
           }
         })
       })
-      await animationChange(arr, point, i)
-      arr[k++] = { value: leftArr[i++].value, color: point }
+      await animationChange(arr, point, left + i)
+      arr[k++] = leftArr[i++]
     } else {
       setData((prevState) => {
         return prevState.map((element, index) => {
           if (index === k) {
-            return { value: rightArr[j].value, color: point }
+            return { value: rightArr[j].value }
           } else {
             return element
           }
         })
       })
-      await animationChange(arr, point, j)
-      arr[k++] = { value: rightArr[j++].value, color: point }
+      await animationChange(arr, point, mid + 1 + j)
+      arr[k++] = rightArr[j++]
     }
   }
   // copy left over
@@ -72,27 +70,27 @@ const Merge = async (arr, left, mid, right, animationChange, swapStateValue, fin
     setData((prevState) => {
       return prevState.map((element, index) => {
         if (index === k) {
-          return { value: leftArr[i].value, color: point }
+          return { value: leftArr[i].value }
         } else {
           return element
         }
       })
     })
-    await animationChange(arr, point, i)
-    arr[k++] = { value: leftArr[i++].value, color: point }
+    await animationChange(arr, point, left + i)
+    arr[k++] = leftArr[i++]
   }
   while (j < rightArrSize) {
     setData((prevState) => {
       return prevState.map((element, index) => {
         if (index === k) {
-          return { value: rightArr[j].value, color: point }
+          return { value: rightArr[j].value }
         } else {
           return element
         }
       })
     })
-    await animationChange(arr, point, j)
-    arr[k++] = { value: rightArr[j++].value, color: point }
+    await animationChange(arr, point, mid + 1 + j)
+    arr[k++] = rightArr[j++]
   }
 }
 
