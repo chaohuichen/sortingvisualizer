@@ -18,9 +18,9 @@ const BubbleSort = async (data, animationChange, swapStateValue, finalFinishAnim
       await animationChange(data, original, j + 1, i)
     }
   }
-  finalFinishAnimation()
+
   finalSetData([...data])
-  // setIsActive(false)
+  finalFinishAnimation()
 };
 
 export default BubbleSort

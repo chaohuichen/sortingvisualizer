@@ -18,8 +18,8 @@ const SelectionSort = async (arr, animationChange, swapStateValue, finalFinishAn
       await animationChange(arr, swap, min, i)
     }
   }
-  finalFinishAnimation(arr)
   finalSetData(arr)
+  finalFinishAnimation()
 }
 
 export default SelectionSort

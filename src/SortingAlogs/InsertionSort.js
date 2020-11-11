@@ -25,7 +25,7 @@ const InsertionSort = async (data, animationChange, swapStateValue, finalFinishA
       }
     }
   }
-  finalFinishAnimation()
   finalSetData(data)
+  finalFinishAnimation()
 }
 export default InsertionSort

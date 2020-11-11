@@ -13,8 +13,8 @@ const MergeSort = async (array, animationChange, finalFinishAnimation, finalSetD
       await Merge(array, leftStart, mid, rightEnd, animationChange, changeSingleValue)
     }
   }
-  finalFinishAnimation()
   finalSetData(array)
+  finalFinishAnimation()
 }
 
 const Merge = async (arr, left, mid, right, animationChange, changeSingleValue) => {

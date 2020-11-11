@@ -7,7 +7,7 @@ import {
   MenuItem,
   InputLabel
 } from '@material-ui/core';
-import { InsertionSort, MergeSort, BubbleSort, QuickSort, SelectionSort, ShellSort } from '../SortingAlogs';
+import { InsertionSort, MergeSort, BubbleSort, QuickSort, SelectionSort, ShellSort, ShellSortKnuth } from '../SortingAlogs';
 import { finish } from '../SortingAlogs/ConstantsColor';
 import Timer from './Timer';
 import AlgoComplexityInfo from './AlgoComplexityInfo'
@@ -49,6 +49,9 @@ function SingleChart ({ incomingData, startAnimation }) {
         break;
       case 'shellSort':
         ShellSort(data, animationChange, swapStateValue, finalFinishAnimation, finalSetData, changeSingleValue)
+        break;
+      case 'shellSortKnuth':
+        ShellSortKnuth(data, animationChange, swapStateValue, finalFinishAnimation, finalSetData, changeSingleValue)
         break;
       default:
     }
@@ -100,14 +103,20 @@ function SingleChart ({ incomingData, startAnimation }) {
   }
 
   const finalFinishAnimation = async () => {
-    for (let i = 0; i < data.length; ++i) {
-      data[i] = {
-        value: data[i].value,
-        color: finish
-      }
-      await animationChange(data, finish, i)
-      await sleep(0)
-    }
+    // for (let i = 0; i < data.length; ++i) {
+    //   data[i] = {
+    //     value: data[i].value,
+    //     color: finish
+    //   }
+    // }
+    setData((prevState) => {
+      return prevState.map((element) => {
+        return {
+          value: element.value,
+          color: finish
+        }
+      })
+    })
   }
 
   return (
@@ -135,6 +144,7 @@ function SingleChart ({ incomingData, startAnimation }) {
             <MenuItem value={'selectionSort'}>Selection Sort</MenuItem>
             <MenuItem value={'mergeSort'}>Merge Sort</MenuItem>
             <MenuItem value={'quickSort'}>Quick Sort</MenuItem>
+            <MenuItem value={'shellSortKnuth'}>Shell Sort Knuth</MenuItem>
           </Select>
         </FormControl>
           <Timer isActive={isActive} seconds={seconds} setSeconds={setSeconds}/>
