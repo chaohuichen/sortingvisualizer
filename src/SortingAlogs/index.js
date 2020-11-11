@@ -3,5 +3,5 @@ import InsertionSort from './InsertionSort';
 import MergeSort from './MergeSort';
 import QuickSort from './QuickSort';
 import SelectionSort from './SelectionSort';
-
-export { BubbleSort, InsertionSort, MergeSort, QuickSort, SelectionSort }
+import ShellSort from './ShellSort'
+export { BubbleSort, InsertionSort, MergeSort, QuickSort, SelectionSort, ShellSort }

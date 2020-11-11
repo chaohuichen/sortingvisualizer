@@ -7,7 +7,7 @@ import {
   MenuItem,
   InputLabel
 } from '@material-ui/core';
-import { InsertionSort, MergeSort, BubbleSort, QuickSort, SelectionSort } from '../SortingAlogs';
+import { InsertionSort, MergeSort, BubbleSort, QuickSort, SelectionSort, ShellSort } from '../SortingAlogs';
 import { finish } from '../SortingAlogs/ConstantsColor';
 import Timer from './Timer';
 import AlgoComplexityInfo from './AlgoComplexityInfo'
@@ -47,6 +47,9 @@ function SingleChart ({ incomingData, startAnimation }) {
       case 'mergeSort':
         MergeSort(data, animationChange, finalFinishAnimation, finalSetData, changeSingleValue)
         break;
+      case 'shellSort':
+        ShellSort(data, animationChange, swapStateValue, finalFinishAnimation, finalSetData, changeSingleValue)
+        break;
       default:
     }
   }
@@ -55,7 +58,7 @@ function SingleChart ({ incomingData, startAnimation }) {
     setData((prevState) => {
       return prevState.map((element, index) => {
         if (index === k) {
-          return { value: value }
+          return { value: value, color: element.color }
         } else {
           return element
         }
@@ -80,7 +83,7 @@ function SingleChart ({ incomingData, startAnimation }) {
         }
       })
     })
-    await sleep(10)
+    await sleep(1000)
   };
   const swapStateValue = (x, y) => {
     setData((prevState) => {
@@ -127,6 +130,7 @@ function SingleChart ({ incomingData, startAnimation }) {
               value={sortingAlgo}
           >
             <MenuItem value={'bubbleSort'}>Bubble Sort</MenuItem>
+            <MenuItem value={'shellSort'}>Shell Sort</MenuItem>
             <MenuItem value={'insertionSort'}>Insertion Sort</MenuItem>
             <MenuItem value={'selectionSort'}>Selection Sort</MenuItem>
             <MenuItem value={'mergeSort'}>Merge Sort</MenuItem>
