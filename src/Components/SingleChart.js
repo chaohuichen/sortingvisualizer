@@ -83,7 +83,7 @@ function SingleChart ({ incomingData, startAnimation }) {
         }
       })
     })
-    await sleep(1000)
+    await sleep(10)
   };
   const swapStateValue = (x, y) => {
     setData((prevState) => {
