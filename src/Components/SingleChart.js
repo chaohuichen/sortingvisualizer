@@ -7,7 +7,7 @@ import {
   MenuItem,
   InputLabel
 } from '@material-ui/core';
-import { InsertionSort, MergeSort, BubbleSort, QuickSort, SelectionSort, ShellSort, ShellSortKnuth } from '../SortingAlogs';
+import { InsertionSort, MergeSort, BubbleSort, QuickSort, SelectionSort, ShellSort, ShellSortKnuth, PancakeSort } from '../SortingAlogs';
 import { finish } from '../SortingAlogs/ConstantsColor';
 import Timer from './Timer';
 import AlgoComplexityInfo from './AlgoComplexityInfo'
@@ -53,6 +53,9 @@ function SingleChart ({ incomingData, startAnimation }) {
       case 'shellSortKnuth':
         ShellSortKnuth(data, animationChange, swapStateValue, finalFinishAnimation, finalSetData, changeSingleValue)
         break;
+      case 'pancakeSort':
+        PancakeSort(data, animationChange, swapStateValue, finalFinishAnimation, finalSetData);
+        break;
       default:
     }
   }
@@ -68,7 +71,6 @@ function SingleChart ({ incomingData, startAnimation }) {
       })
     })
   }
-
   const finalSetData = (data) => {
     setData([...data])
     setIsActive(false)
@@ -103,12 +105,6 @@ function SingleChart ({ incomingData, startAnimation }) {
   }
 
   const finalFinishAnimation = async () => {
-    // for (let i = 0; i < data.length; ++i) {
-    //   data[i] = {
-    //     value: data[i].value,
-    //     color: finish
-    //   }
-    // }
     setData((prevState) => {
       return prevState.map((element) => {
         return {
@@ -145,6 +141,7 @@ function SingleChart ({ incomingData, startAnimation }) {
             <MenuItem value={'mergeSort'}>Merge Sort</MenuItem>
             <MenuItem value={'quickSort'}>Quick Sort</MenuItem>
             <MenuItem value={'shellSortKnuth'}>Shell Sort Knuth</MenuItem>
+            <MenuItem value={'pancakeSort'}>Pancake Sort</MenuItem>
           </Select>
         </FormControl>
           <Timer isActive={isActive} seconds={seconds} setSeconds={setSeconds}/>

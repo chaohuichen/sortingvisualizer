@@ -4,5 +4,5 @@ import MergeSort from './MergeSort';
 import QuickSort from './QuickSort';
 import SelectionSort from './SelectionSort';
 import ShellSort, { ShellSortKnuth } from './ShellSort'
-
-export { BubbleSort, InsertionSort, MergeSort, QuickSort, SelectionSort, ShellSort, ShellSortKnuth }
+import PancakeSort from './PancakeSort';
+export { BubbleSort, InsertionSort, MergeSort, QuickSort, SelectionSort, ShellSort, ShellSortKnuth, PancakeSort }
