@@ -16,7 +16,8 @@ import {
   ShellSort,
   ShellSortKnuth,
   PancakeSort,
-  HeapSort
+  HeapSort,
+  RadixSort
 } from '../SortingAlogs';
 import { finish } from '../SortingAlogs/ConstantsColor';
 import Timer from './Timer';
@@ -24,7 +25,7 @@ import AlgoComplexityInfo from './AlgoComplexityInfo'
 
 function SingleChart ({ incomingData, startAnimation }) {
   const [data, setData] = useState([])
-  const [sortingAlgo, setSortingAlgo] = useState('bubbleSort')
+  const [sortingAlgo, setSortingAlgo] = useState('radixSort')
   useEffect(() => {
     setData([...incomingData])
     if (startAnimation) {
@@ -69,6 +70,9 @@ function SingleChart ({ incomingData, startAnimation }) {
         break;
       case 'heapSort':
         HeapSort(data, animationChange, swapStateValue, finalFinishAnimation, finalSetData)
+        break;
+      case 'radixSort':
+        RadixSort(data, animationChange, swapStateValue, finalFinishAnimation, finalSetData, changeSingleValue)
         break;
       default:
     }
@@ -153,13 +157,14 @@ function SingleChart ({ incomingData, startAnimation }) {
           >
             <MenuItem value={'bubbleSort'}>Bubble Sort</MenuItem>
             <MenuItem value={'shellSort'}>Shell Sort</MenuItem>
+            <MenuItem value={'shellSortKnuth'}>Shell Sort Knuth</MenuItem>
             <MenuItem value={'insertionSort'}>Insertion Sort</MenuItem>
             <MenuItem value={'selectionSort'}>Selection Sort</MenuItem>
             <MenuItem value={'mergeSort'}>Merge Sort</MenuItem>
             <MenuItem value={'quickSort'}>Quick Sort</MenuItem>
-            <MenuItem value={'shellSortKnuth'}>Shell Sort Knuth</MenuItem>
             <MenuItem value={'pancakeSort'}>Pancake Sort</MenuItem>
             <MenuItem value={'heapSort'}>Heap Sort</MenuItem>
+            <MenuItem value={'radixSort'}>Radix Sort</MenuItem>
           </Select>
         </FormControl>
           <Timer isActive={isActive} seconds={seconds} setSeconds={setSeconds}/>

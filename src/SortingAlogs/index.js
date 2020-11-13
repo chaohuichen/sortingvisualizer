@@ -6,5 +6,5 @@ import SelectionSort from './SelectionSort';
 import ShellSort, { ShellSortKnuth } from './ShellSort'
 import PancakeSort from './PancakeSort';
 import HeapSort from './HeapSort';
-
-export { BubbleSort, InsertionSort, MergeSort, QuickSort, SelectionSort, ShellSort, ShellSortKnuth, PancakeSort, HeapSort }
+import RadixSort from './RadixSort';
+export { BubbleSort, InsertionSort, MergeSort, QuickSort, SelectionSort, ShellSort, ShellSortKnuth, PancakeSort, HeapSort, RadixSort }

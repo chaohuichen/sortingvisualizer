@@ -88,5 +88,15 @@
     "SpaceComplexity": {
       "Worst": "O(1)"
     }
+  },
+  "radixSort": {
+    "TimeComplexity": {
+      "Best": "O(nk)",
+      "Average": "O(nk)",
+      "Worst": "O(nk)"
+    },
+    "SpaceComplexity": {
+      "Worst": "O(n+k)"
+    }
   }
 }
