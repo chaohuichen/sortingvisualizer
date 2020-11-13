@@ -7,10 +7,21 @@ import {
   MenuItem,
   InputLabel
 } from '@material-ui/core';
-import { InsertionSort, MergeSort, BubbleSort, QuickSort, SelectionSort, ShellSort, ShellSortKnuth, PancakeSort } from '../SortingAlogs';
+import {
+  InsertionSort,
+  MergeSort,
+  BubbleSort,
+  QuickSort,
+  SelectionSort,
+  ShellSort,
+  ShellSortKnuth,
+  PancakeSort,
+  HeapSort
+} from '../SortingAlogs';
 import { finish } from '../SortingAlogs/ConstantsColor';
 import Timer from './Timer';
 import AlgoComplexityInfo from './AlgoComplexityInfo'
+
 function SingleChart ({ incomingData, startAnimation }) {
   const [data, setData] = useState([])
   const [sortingAlgo, setSortingAlgo] = useState('bubbleSort')
@@ -56,6 +67,9 @@ function SingleChart ({ incomingData, startAnimation }) {
       case 'pancakeSort':
         PancakeSort(data, animationChange, swapStateValue, finalFinishAnimation, finalSetData);
         break;
+      case 'heapSort':
+        HeapSort(data, animationChange, swapStateValue, finalFinishAnimation, finalSetData)
+        break;
       default:
     }
   }
@@ -71,10 +85,12 @@ function SingleChart ({ incomingData, startAnimation }) {
       })
     })
   }
+
   const finalSetData = (data) => {
     setData([...data])
     setIsActive(false)
   }
+
   const animationChange = async (data, color, x, y) => {
     setData(() => {
       return data.map((element, index) => {
@@ -90,6 +106,7 @@ function SingleChart ({ incomingData, startAnimation }) {
     })
     await sleep(10)
   };
+
   const swapStateValue = (x, y) => {
     setData((prevState) => {
       return prevState.map((element, index) => {
@@ -142,6 +159,7 @@ function SingleChart ({ incomingData, startAnimation }) {
             <MenuItem value={'quickSort'}>Quick Sort</MenuItem>
             <MenuItem value={'shellSortKnuth'}>Shell Sort Knuth</MenuItem>
             <MenuItem value={'pancakeSort'}>Pancake Sort</MenuItem>
+            <MenuItem value={'heapSort'}>Heap Sort</MenuItem>
           </Select>
         </FormControl>
           <Timer isActive={isActive} seconds={seconds} setSeconds={setSeconds}/>
