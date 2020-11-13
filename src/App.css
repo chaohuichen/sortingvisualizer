@@ -37,6 +37,11 @@
   grid-column-gap: 1.5rem;
   grid-row-gap: 2rem;
 }
+.slider {
+  width: 10vw;
+  margin: 0 auto;
+  max-width: 500px;
+}
 
 /*for time complexity color */
 .red{
