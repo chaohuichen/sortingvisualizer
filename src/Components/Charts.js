@@ -63,6 +63,7 @@ const Charts = () => {
         Array Size
       </Typography>
     <Slider max={100} min={4}
+            disabled={state.startAnimation}
             value={arraySide}
             onChange={(event, newValue) => { changeArraySlide(newValue) }}
             aria-labelledby="continuous-slider"
