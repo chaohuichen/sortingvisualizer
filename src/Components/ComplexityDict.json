@@ -71,9 +71,9 @@
   },
   "pancakeSort": {
     "TimeComplexity": {
-      "Best": "O(n)",
-      "Average": "O((nlog(n))^2)",
-      "Worst": "O((nlog(n))^2)"
+      "Best": "O(n^2)",
+      "Average": "O((n^2)",
+      "Worst": "O((n^2)"
     },
     "SpaceComplexity": {
       "Worst": "O(1)"
