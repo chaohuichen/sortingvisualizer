@@ -25,7 +25,7 @@ import AlgoComplexityInfo from './AlgoComplexityInfo'
 
 function SingleChart ({ incomingData, startAnimation }) {
   const [data, setData] = useState([])
-  const [sortingAlgo, setSortingAlgo] = useState('radixSort')
+  const [sortingAlgo, setSortingAlgo] = useState('bubbleSort')
   useEffect(() => {
     setData([...incomingData])
     if (startAnimation) {
