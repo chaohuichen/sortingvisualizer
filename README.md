@@ -1,5 +1,5 @@
 # Sorting Visualizer 
-A website that display different sorting algorithm visualizer. Inspired by [Clément Mihailescu](https://www.youtube.com/channel/UCaO6VoaYJv4kS-TQO_M-N_g/about).
+A website that display different sorting algorithms with animation chart. Inspired by [Clément Mihailescu](https://www.youtube.com/channel/UCaO6VoaYJv4kS-TQO_M-N_g/about).
 
 Live Demo: https://chaohuichen.github.io/sortingvisualizer/
 
